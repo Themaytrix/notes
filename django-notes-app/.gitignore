@@ -1,0 +1,42 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and settings
+.env
+*.env
+.env.*
+
+# Django specific files
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+*.log
+
+# If you're using migrations (optional if you want to exclude generated migrations)
+#migrations/
+
+# MacOS specific files
+.DS_Store
+
+# Virtual environment
+venv/
+env/
+
+# PyCharm specific files
+.idea/
+
+# VS Code specific files
+.vscode/
+
+# If you're using frontend files with npm or Yarn
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build files
+build/
+dist/
