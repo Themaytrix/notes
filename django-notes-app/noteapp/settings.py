@@ -12,11 +12,32 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
-db_user = os.environ.get('NOTES_DB_USER')
-print(db_user)
-db_password = os.environ.get('NOTES_DB_PASSWORD')
-print(db_password)
+load_dotenv()
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # Change to INFO in production
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,9 +50,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8(r879ah_ntenwdk$b)*rxvs)#%m4l3cxmyuxn-kl188g(d3ru'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,10 +108,10 @@ WSGI_APPLICATION = 'noteapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'notes',
-        'USER' : db_user,
-        'PASSWORD' : db_password,
-        'HOST': 'localhost',  # Or use '127.0.0.1' if 'localhost' doesn't work
+        'NAME': os.getenv("MYSQL_DATABASE"),
+        'USER' : os.getenv("MYSQL_USER"),
+        'PASSWORD' : os.getenv("MYSQL_PASSWORD"),
+        'HOST': 'db',  # Or use '127.0.0.1' if 'localhost' doesn't work
         'PORT': '3306',  # Default MySQL port
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
@@ -135,12 +156,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# STATICFILES_DIRS = [
+#     BASE_DIR/'frontend/build/static'
+# ]
+
 STATICFILES_DIRS = [
     BASE_DIR/'frontend/build/static'
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/ubuntu/notes/django-notes-app/media/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = '/app/django-notes-app/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
