@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+print( os.getenv("DATABASE_HOST"))
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
