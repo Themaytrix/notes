@@ -8,10 +8,10 @@ WORKDIR /frontend
 COPY package.json package-lock.json ./
 
 # run commmand
-RUN npm install --legacy-peer-deps && ls node_modules/react-scripts
+RUN npm install 
 
 # Ensure react-scripts is installed properly
-RUN npm install react-scripts
+# RUN npm install react-scripts
 
 COPY . .
 
