@@ -4,9 +4,9 @@ services:
     build: 
       context: ./django-notes-app
       dockerfile: Dockerfile
-    container_name: djanngo_backend
+    container_name: backend
     volumes:
-      - static_build:/app/staticfiles
+      - frontend_build:/app/staticfiles
     ports:
       - "8000:8000"
     depends_on:
@@ -22,40 +22,40 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
       interval: 10s
       timeout: 5s
       retries: 3
 
-  frontend:
-    build: 
-      context: ./django-notes-app/frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    volumes:
-      - frontend_build:/frontend/build
+  # frontend:
+  #   build: 
+  #     context: ./django-notes-app/frontend
+  #     dockerfile: Dockerfile
+  #     target: frontend-builder
+  #   container_name: frontend
+  #   volumes:
+  #     - frontend_build:/frontend/build
 
   nginx:
     build: 
-      context: ./nginx
+      context: ./django-notes-app/frontend
       dockerfile: Dockerfile
     # image: nginx:latest
+    volumes:
+      - frontend_build:/app/staticfiles
     ports:
       - 80:80
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - frontend_build:/var/www/frontend
-      - static_build:/app/staticfiles
     depends_on:
-      - frontend
-      - backend
+    - backend
+      # - frontend
+      
 
 
 volumes:
   db-data:
     driver: local
   frontend_build:
-  static_build:
+  # static_build:
 
 
 
