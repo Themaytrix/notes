@@ -14,10 +14,12 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+# get environment variables
 load_dotenv()
 
 print( os.getenv("DATABASE_HOST"))
 
+# Add logging block to be able to view python callback error in deployment logs
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -54,7 +56,7 @@ SECRET_KEY = 'django-insecure-8(r879ah_ntenwdk$b)*rxvs)#%m4l3cxmyuxn-kl188g(d3ru
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*'] # '*' to allow all hosts
 
 
 # Application definition
@@ -109,7 +111,7 @@ WSGI_APPLICATION = 'noteapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.mysql', #setup for MYSQL database
         'NAME': os.getenv("MYSQL_DATABASE"),
         'USER' : os.getenv("MYSQL_USER"),
         'PASSWORD' : os.getenv("MYSQL_PASSWORD"),
@@ -176,4 +178,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True   #Allow all corsheaders 
