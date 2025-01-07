@@ -90,7 +90,7 @@ ROOT_URLCONF = 'noteapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'frontend/build'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -164,10 +164,10 @@ STATIC_URL = 'static/'
 #     BASE_DIR/'frontend/build/static'
 # ]
 
-STATICFILES_DIRS = [
-    BASE_DIR/'frontend/build/static'
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = [
+#     BASE_DIR/'frontend/build/static'
+# ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = '/app/django-notes-app/media/'

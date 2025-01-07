@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # collect static files from staticfiles directory
-python3 manage.py collectstatic --noinput
+# python3 manage.py collectstatic --noinput
 
 # prepare django application to make migrations
 python3 manage.py makemigrations --no-input
