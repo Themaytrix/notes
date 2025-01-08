@@ -13,7 +13,6 @@ RUN apk update && apk add --no-cache \
     mariadb-dev \
     && apk add --no-cache --virtual .build-deps build-base
 
-
 # copy and run requirements.txt
 COPY ./requirements.txt .
 # install project dependencies from requirements.txt

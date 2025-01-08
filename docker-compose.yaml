@@ -5,8 +5,6 @@ services:
       context: ./django-notes-app
       dockerfile: Dockerfile
     container_name: backend
-    volumes:
-      - frontend_build:/app/staticfiles
     ports:
       - "8000:8000"
     depends_on:
