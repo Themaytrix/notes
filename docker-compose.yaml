@@ -27,22 +27,11 @@ services:
       timeout: 5s
       retries: 3
 
-  # frontend:
-  #   build: 
-  #     context: ./django-notes-app/frontend
-  #     dockerfile: Dockerfile
-  #     target: frontend-builder
-  #   container_name: frontend
-  #   volumes:
-  #     - frontend_build:/frontend/build
 
   nginx:
     build: 
       context: ./django-notes-app/frontend
       dockerfile: Dockerfile
-    # image: nginx:latest
-    volumes:
-      - frontend_build:/app/staticfiles
     ports:
       - 80:80
     depends_on:
@@ -54,8 +43,4 @@ services:
 volumes:
   db-data:
     driver: local
-  frontend_build:
-  # static_build:
-
-
 
